@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	
+	<title>Typography Maker, Typography Generator Online</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Typography Maker, Typography Generator Online">
+	<meta name="keywords" content="typography, text art, font">
+	<meta name="author" content="takien.com">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+<script>
+(function(window,document,undefined){"use strict";var fallback={callbacks:[],completed:{},completed_count:0,head:document.getElementsByTagName("head")[0],libraries:{},libraries_count:0,spawned:[],failed:{},failed_count:0,shims:{},success:{},success_count:0};fallback.bootstrap=function(){var e,t;for(e in fallback.utilities){t=fallback.utilities[e];fallback.utility(t)}};fallback.utilities=["Array","Function","Object","String"];fallback.utility=function(e){fallback["is_"+e.toLowerCase()]=function(t){return Object.prototype.toString.call(t)=="[object "+e+"]"}};fallback.callback=function(e){var t=this;if(!t.is_function(e)){e=function(){}}return e};fallback.index_of=function(e,t){var n;for(n in e){if(e[n]===t){return n}}return-1};fallback.is_defined=function(variable){try{if(eval("window."+variable)){return true}}catch(exception){return false}return false};fallback.importer=function(e,t){var n=this,r,i;var s,o;var u,a,f,l,c;var h={};for(s in e){o=e[s];if(!o){continue}if(n.is_string(o)){o=[o]}if(!n.is_array(o)){continue}r=[];if(n.is_array(n.libraries[s])){r=n.libraries[s]}h[s]=o;n.libraries[s]=r.concat(o)}u={};if(n.is_object(t)&&n.is_object(t.shim)){f=t.shim;for(a in f){l=f[a];if(!n.libraries[a]){continue}if(!l){continue}if(n.is_string(l)){l=[l]}if(!n.is_array(l)){continue}c=[];for(i in l){s=l[i];if(n.libraries[s]&&s!==a){c.push(s)}}r=[];if(n.is_array(n.shims[a])){r=n.shims[a]}u[a]=c;n.shims[a]=r.concat(c)}}return{libraries:h,shims:u}};fallback.css={};fallback.css.check=function(e){var t=fallback;if(!document.styleSheets){return false}var n,r,i;for(n in document.styleSheets){r=document.styleSheets[n];if(r===0){continue}if(r.rules){i=t.css.scan(r.rules,e);if(i){return i}}try{if(r.cssRules){i=t.css.scan(r.cssRules,e);if(i){return i}}}catch(s){continue}}return false};fallback.css.scan=function(e,t){var n,r;for(n in e){r=e[n];if(r.selectorText===t){return true}}return false};fallback.load=function(e,t,n){var r=this;var i,s,o;if(!r.is_object(e)){return false}if(r.is_function(t)){n=t;t={}}if(!r.is_object(t)){t={}}i=r.importer(e,t);for(s in i.libraries){o=i.libraries[s];if(!r.shims[s]){r.spawn(s,o)}}if(r.is_function(n)){r.ready([],n)}};fallback.ready=function(e,t){var n=this;var r,i;if(n.is_function(e)){t=e;e=[]}else{if(!n.is_array(e)||n.is_string(e)){e=[e]}for(r in e){i=e[r];if(n.libraries[i]&&!n.shims[i]){n.spawn(i,n.libraries[i])}}}n.callbacks.push({callback:n.callback(t),libraries:e});return n.ready_invocation()};fallback.ready_invocation=function(){var e=this,t,n,r,i,s,o=[],u=[];for(t in e.callbacks){s=e.callbacks[t];if(!e.is_object(s)||!e.is_array(s.libraries)||!e.is_function(s.callback)){continue}i=false;if(s.libraries.length>0){n=0;for(r in e.success){if(e.index_of(s.libraries,r)>=0){n++}}if(n===s.libraries.length){i=true}}else if(e.libraries_count===e.success_count+e.failed_count){i=true}if(i){u.push(s.callback)}else{o.push(e.callbacks[t])}}e.callbacks=o;for(t in u){u[t](e.success,e.failed)}};fallback.shim_invocation=function(){var e=this;var t,n,r,i;for(r in e.shims){i=e.shims[r];if(!i||e.success[r]){continue}t=0;for(n in i){if(e.success[i[n]]){t++}}if(t===i.length){e.spawn(r,e.libraries[r]);delete e.shims[r]}}};fallback.spawn=function(e,t){var n=this;if(n.index_of(n.spawned,e)!==-1){return false}n.libraries_count++;n.spawned.push(e);return n.spawn.instance(e,t)};fallback.spawn.instance=function(e,t){var n=fallback;var r;var i="js";var s={library:e,spawned:true,url:t.shift(),urls:t};if(s.url.indexOf(".css")>-1){i="css";if(n.css.check(e)){s.spawned=false;return n.spawn.success(s)}r=document.createElement("link");r.crossorigin=true;r.rel="stylesheet";r.href=s.url}else{if(n.is_defined(e)){s.spawned=false;return n.spawn.success(s)}r=document.createElement("script");r.src=s.url}r.onload=function(){if(i==="js"&&!n.is_defined(e)){return n.spawn.failed(s)}return n.spawn.success(s)};r.onreadystatechange=function(){if(!this.readyState||this.readyState==="loaded"||this.readyState==="complete"){this.onreadystatechange=null;if(i==="js"&&!n.is_defined(e)){return n.spawn.failed(s)}return n.spawn.success(s)}};r.onerror=function(){return n.spawn.failed(s)};return n.head.appendChild(r)};fallback.spawn.failed=function(e){var t=fallback;e.spawned=false;if(!t.failed[e.library]){t.failed[e.library]=[]}t.failed[e.library].push(e.url);if(!e.urls.length){t.failed_count++;return t.ready_invocation()}return t.spawn.instance(e.library,e.urls)};fallback.spawn.success=function(e){var t=fallback;t.success[e.library]=e.url;t.success_count++;t.shim_invocation();return t.ready_invocation()};fallback.bootstrap();window.fallback=fallback})(window,document,undefined);
+</script>
+
+</head>
+<body id="body">
+<header id="header" class="container-fluid">
+	<nav class="navbar navbar-default" role="navigation">
+	  <div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="http://typographymaker.com/">TYPOGRAPHY MAKER</a>
+		</div>
+
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav">
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flag-checkered"></i> New <b class="caret"></b></a>
+			  <ul class="dropdown-menu">
+				<li><a id="new-blank" href="#"><i class="fa fa-file-o"></i> Blank</a></li>
+				<li class="disabled"><a href="#"><i class="fa fa-file-text-o"></i> From template</a></li>
+				<li class="disabled"><a href="#"><i class="fa fa-folder-open-o"></i> Load</a></li>
+				
+			  </ul>
+			</li>
+			<!--
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Edit <b class="caret"></b></a>
+			  <ul class="dropdown-menu">
+				
+				
+			  </ul>
+			</li>-->
+			
+
+
+			<li><a id="publish" href="#" data-toggle="modal" data-target="#modal-publish"><i class="fa fa-globe"></i> Publish</a></li>
+			<li><a id="download" href="#" download="typography.png"><i class="fa fa-download"></i> Download</a></li>
+			<li> <a title="View all published typography" href="http://typographymaker.com/public"><i class="fa fa-eye"></i> View </a></li>
+			<li class="dropdown">
+			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-share"></span> Share <b class="caret"></b></a>
+			  <ul class="dropdown-menu">
+				<li class="disabled"><a href="#">Facebook</a></li>
+				<li class="disabled"><a href="#">Twitter</a></li>
+				<li class="disabled"><a href="#">Google Plus</a></li>
+				
+			  </ul>
+			</li>
+		  </ul>
+			
+		  <ul class="nav navbar-nav navbar-right">
+			<li>
+			   <a href="#" data-toggle="modal" data-target="#modal-help" data-title="Help">Help</a>
+			</li>
+			<li class="dropdown norelative">
+			  <a href="#" data-toggle="modal" data-target="#modal-about">About</a>
+			 
+			</li>
+		  </ul>
+		  <div class="navbar-right"> 
+		  	 <div id="share-buttons">
+			 <ul class="quick-links">
+			 <li class="fb-login-btn"><div class="fb-login-button"  data-scope='email' data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="false"></div></li>
+			 <li class="fb-loggedin-btn"><div class="fb-avatar"></div><div class="fb-name"></div></li>
+			<li class="fb-btn">
+			<fb:like layout="button_count" send="false" href="http://typographymaker.com"></fb:like>
+			</li>
+			  <li class="tweet-btn">
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://typographymaker.com" data-count="horizontal">Tweet</a>
+			  </li>
+			  <li class="gplus-btn">
+				<g:plusone url="http://typographymaker.com" size="medium"></g:plusone>
+			   </li>
+			</ul>
+				</div>
+		  </div>
+	  
+		</div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	<div id="toolbar">
+
+		<div class="btn-group" id="font-style">
+			<button class="btn btn-default control-toggle" data-control="bold" ><i class="fa fa-bold"></i></button>
+			<button class="btn btn-default control-toggle" data-control="italic" ><i class="fa fa-italic"></i></button>
+			<button class="btn btn-default control-toggle" data-control="underline" ><i class="fa fa-underline"></i></button>
+		</div>
+		<div class="btn-group" id="text-align">
+		  <button type="button" class="btn btn-default control-prop" data-control="text-align" data-value="left" title="Text align left"><i class="fa fa-align-left"></i></button>
+		  <button type="button" class="btn btn-default control-prop" data-control="text-align" data-value="center" title="Text align center"><i class="fa fa-align-center"></i></button>
+		  <button type="button" class="btn btn-default control-prop" data-control="text-align" data-value="right" title="Text align right"><i class="fa fa-align-right"></i></button>
+		  <button type="button" class="btn btn-default control-prop" data-control="text-align" data-value="justify" title="Text align justify"><i class="fa fa-align-justify"></i></button>
+		</div>
+		
+		<!-- font family -->
+		<div class="btn-group">
+		<select id="font-family" name="font-family" class="fake-select control-prop" data-control="font-family" title="Font family">
+			<option style="font-family:'Bebas Neue'" value="bebas neue">Bebas Neue</option>
+			<option style="font-family:'LeagueGothicRegular'" value="leaguegothicregular">LeagueGothicRegular</option>
+			<option style="font-family:'Arial'" value="arial">Arial</option>
+			<option style="font-family:'Times New Roman'" value="times new roman">Times New Roman</option>
+			<option style="font-family:'Verdana'" value="verdana">Verdana</option>
+			<option style="font-family:'Impact'" value="impact">Impact</option>
+			<option style="font-family:'Pacifico'" value="pacifico">Pacifico</option>
+			<option style="font-family:'Roboto'" value="roboto">Roboto</option>
+			<option style="fonf-family:'Lobster'" value="lobster">Lobster</option>
+			<option style="fonf-family:'Special Elite'" value="special elite">Special Elite</option>
+			<option style="fonf-family:'Chewy'" value="chewy">Chewy</option>
+			<option style="fonf-family:'Playball'" value="playball">Playball</option>
+			<option style="fonf-family:'Bangers'" value="bangers">Bangers</option>
+			<option style="fonf-family:'Oleo Script'" value="oleo script">Oleo Script</option>
+			<option style="fonf-family:'Coda'" value="coda">Coda</option>
+			<option style="fonf-family:'Alfa Slab One'" value="alfa slab one">Alfa Slab One</option>
+			<option style="fonf-family:'Cinzel Decorative'" value="cinzel decorative">Cinzel Decorative</option>
+			<option style="fonf-family:'Oleo Script Swash Caps'" value="oleo script swash caps">Oleo Script Swash Caps</option>
+			<option style="fonf-family:'UnifrakturMaguntia'" value="unifrakturmaguntia">UnifrakturMaguntia</option>
+			<option style="fonf-family:'Creepster'" value="creepster">Creepster</option>
+			<option style="fonf-family:'Nosifer'" value="nosifer">Nosifer</option>
+		</select>
+	   </div>
+	   
+	   <!-- font size -->
+		<div class="btn-group">
+			<div class="input-group">
+			  <input id="font-size" type="number" class="form-control control-prop" data-control="font-size" placeholder="1" value="20" min="15" max="100">
+			</div>
+	   </div>
+
+		
+	<!-- line height-->
+	  <div class="btn-group">
+			 <div class="input-group">
+			  <span class="input-group-addon">Line height</span>
+			  <input id="line-height" type="number" class="form-control control-prop" data-control="line-height" placeholder="1" value="1.4" min="1" max="5" step="any">
+			</div>
+		</div>
+		
+  	<!-- opacity-->
+	  <div class="btn-group">
+			 <div class="input-group">
+			  <span class="input-group-addon">Opacity</span>
+			  <input id="opacity" type="number" class="form-control control-prop" data-control="opacity" placeholder="100" value="100" min="0" max="100">
+			</div>
+		</div>
+	
+	<div class="btn-group">
+	<div class="input-group">
+		<span class="input-group-addon nopad"><button class="btn i i-fill nodis"></button></span>
+		<input type="text" id="color-fill" class="nodis form-control control-prop color {hash:true,pickerClosable:true}" data-control="fill" value="#FFFFFF" title="Fill color">
+	</div>
+	</div>
+
+	
+	<div class="btn-group">
+		<select id="stroke-width" class="fake-select control-prop" data-control="stroke-width" title="Stroke width">
+			<option value="No stroke">No stroke</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+		</select>
+	   </div>
+	<div class="btn-group">
+		<div class="input-group">
+			<span class="input-group-addon nopad"><button class="nodis btn i i-line"></button></span>
+			<input type="text" id="stroke-color" class="nodis form-control control-prop color {hash:true,pickerClosable:true}" data-control="stroke-color" value="#000000" title="Stroke color">
+		</div>
+	</div>
+	<div class="btn-group">
+		<button title="Align objects left" class="btn btn-default control i i-align-left" data-control="align-object" data-value="left"></button>
+		<button title="Align objects right" class="btn btn-default control i i-align-right" data-control="align-object" data-value="right"></button>
+		<button title="Align objects top" class="btn btn-default control i i-align-top" data-control="align-object" data-value="top"></button>
+		<button title="Align objects bottom" class="btn btn-default control i i-align-bottom" data-control="align-object" data-value="bottom"></button>
+		<button title="Align objects center vertically" class="btn btn-default control i i-align-centerv" data-control="align-object" data-value="centerv"></button>
+		<button title="Align objects center horizontally" class="btn btn-default control i i-align-centerh" data-control="align-object" data-value="centerh"></button>
+	</div>
+	<div class="btn-group">
+		<button title="Equalize width" class="btn btn-default control i i-equal-width" data-control="equal-object" data-value="width"></button>
+		<button title="Equalize height" class="btn btn-default control i i-equal-height" data-control="equal-object" data-value="height"></button> 
+	</div>
+	<div class="btn-group">
+		<button title="Text split line" class="btn btn-default control i i-split-textline" data-control="split-text" data-value="line"></button> 
+		<button title="Text split characters" class="btn btn-default control i i-split-textchar" data-control="split-text" data-value="char"></button> 
+		<button title="Text split words" class="btn btn-default control i i-split-textword" data-control="split-text" data-value="word"></button> 
+	</div>
+	</div>
+</header>
+<main class="container-fluid">
+	<div class="row">
+		<div class="col-md-9" id="main">
+		<div id="sidebar">
+		<div class="panel-group admin-menu" id="accordion">
+			  <div class="panel panel-default">
+				<div class="panel-heading">
+				  <h4 class="panel-title">
+					<a data-toggle="collapse" class="pull-right"  href="#collapseZero">
+					  <span class="fa fa-chevron-down"></span>
+					</a>
+					 <a href="#" class="">
+						INSERT
+					  </a>
+				  </h4>
+				</div>
+				<div id="collapseZero" class="panel-collapse collapse in">
+				  <div class="panel-body">
+					<div class="btn-group">
+					<button class="btn btn-default control-add i i-text" data-control="text" title="Text"></button>
+					<button class="btn btn-default control-add i i-rect" data-control="rectangle" title="Rectangle"></button>
+					<button class="btn btn-default control-add i i-circle" data-control="circle" title="Circle"></button>
+					<button class="btn btn-default control-add i i-triangle" data-control="triangle" title="Triangle"></button>
+					<button class="btn btn-default control-add i i-line" data-control="line" title="Line"></button>
+					</div>
+					<div style="margin-top:20px">
+										
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs">
+					  <li class="active"><a href="#upload-image" data-toggle="tab">Upload</a></li>
+					  <li><a href="#search-image" data-toggle="tab">Search</a></li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+					  <div class="tab-pane active" id="upload-image" style="text-align:center">
+					  
+					  <a id="upload" href="#" style="margin:10px auto;" class="btn btn-default"><i class="fa fa-upload"></i> Upload image</a>
+					  
+					  </div>
+					  <div class="tab-pane" id="search-image">
+					  
+					  <form action="" style="margin-top:20px">
+						<input id="img-search" type="text" class="form-control" placeholder="Search image from Pixabay">
+					</form>
+					<div id="img-result"></div>
+					  </div>
+
+					</div>
+						
+					</div>
+					
+					
+				  </div>
+				</div>
+			  </div> 
+			
+			  <div class="panel panel-default">
+				<div class="panel-heading">
+				  <h4 class="panel-title">
+					<a data-toggle="collapse" class="pull-right"  href="#collapseOne">
+					  <span class="fa fa-chevron-down"></span>
+					</a>
+					 <a href="#" class="">
+						OBJECTS
+					  </a>
+				  </h4>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in">
+				  <div class="panel-body" style="padding:0">
+					<div id="layer" class="list-group"></div>
+				   </div>
+				</div>
+			  </div>
+			  <div class="panel panel-default">
+				<div class="panel-heading">
+				  <h4 class="panel-title">
+					<a data-toggle="collapse" class="pull-right"  href="#collapse3">
+					  <span class="fa fa-chevron-down"></span>
+					</a>
+					 <a href="#" class="">
+						PROPERTIES
+					  </a>
+				  </h4>
+				</div>
+				<div id="collapse3" class="panel-collapse collapse in">
+				  <div class="panel-body" style="padding:0">
+					<div id="properties"></div>
+				   </div>
+				</div>
+			  </div>
+			   
+			</div>
+		
+
+
+			</div><!--sidebars-->
+			<div id="canvas-wrap">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					
+					<div class="btn-group pull-right">
+						<a href="#" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-gear"></i></a>
+						<!--<div class="dropdown-menu pull-right">
+							  <label class="btn btn-default"><input id="scale_object" style="margin:0" type="checkbox"> Scale objects on canvas resize</label>
+				 
+						</div>-->
+						
+					</div>
+					
+				  <h4 class="panel-title">Canvas 1 <span>(800 x 500 pixels)</span></h4>
+				</div>
+				<div class="panel-body" style="padding:0">
+					<canvas id="c" width="800" height="500"></canvas>
+				</div>
+		
+			</div>
+			</div>
+	
+		</div>
+		<div class="col-md-3" id="sidebar2">
+			<div class="panel-group admin-menu" id="accordion2">
+				<div class="panel panel-default">
+				<div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-toggle="collapse" class="pull-right"  href="#accordion2-1">
+						  <span class="fa fa-chevron-down"></span>
+						</a>
+						 <a data-toggle="collapse" href="#accordion2-1">
+							Development log
+						  </a>
+						</h4>
+					</div>
+					<div id="accordion2-1" class="panel-collapse collapse in">
+					<div class="panel-body" style="max-height:300px;overflow-y:scroll">
+						<p>This is public beta release, some features may be removed and or modified without notice. Here are some points you may have to know before submit a feedback.</p>
+						<p><strong>Recently added features:</strong></p>
+						<ul>
+							<li>Split text by line.</li>
+							<li>Equalize object width / height.</li>
+							<li>Added object alignment control.</li>
+							<li>Cursor now changed to 'text' when you click text insertion button, and 'crosshair' when inserting triangle, circle etc.</li>
+							<li>Change canvas background color by selecting color when no object is selected.</li>
+							<li>Now you can change text properties (font size etc) in a group at once.</li>
+							<li>Publish typography</li>
+							<li>Upload image</li>
+							<li>Autosave, whenever you made change to the canvas, it will be automatically saved. (Local storage browser feature required)</li>
+							<li>Added object list (layer)</li>
+							<li>Duplicate object</li>
+							<li>Set object style in group at once</li>
+							<li>Add more Google fonts</li>
+						</ul>
+						<p><strong>Recently removed features:</strong></p>
+						<ul>
+							<li>Dragable canvas, removed</li>
+							<li>Scale object relative to canvas, removed</li>
+						</ul>
+						
+						<p><strong>Bugs, fixes and changes:</strong></p>
+						<ul>
+							<li>Facebook connect/account creation is now fixed</li>
+							<li>Color picker sometimes failed to close, now can be manually closed</li>
+							<li>Replace script loader from YepnopeJS to HeadJS, and now use FallbackJS, LOL</li>
+						</ul>
+						
+						<p><strong>Unfinished features:</strong></p>
+						<ul>
+							<li>Save as template</li>
+							<li>Load from template</li>
+							<li>Social share</li>
+						</ul>
+						
+						<p><strong>Next possible features:</strong></p>
+						<ul>
+							<li>Add more keyboard shortcuts</li>
+							<li>Localization</li>
+							<li>Insert clipart, may be from Openclipart.org</li>
+							<li>Undo/Redo</li>
+							<li>Color pallete</li>
+							<li>Gradient fill</li>
+							<li>Copy object style</li>
+							<li>Add your own fonts</li>
+							<li>Drawing mode</li>
+						</ul>
+						<p><strong>Known bugs:</strong></p>
+						<ul>
+							<li>Text object created by duplicate (shift+D) is not editable, you need to reload page to fix this</li>
+							<li>In some condition, object positioning can be frustating</li>
+							<li>You need to reload page manually after successfully connected to Facebook</li>
+						</ul>
+						
+					</div>
+					</div><!-- // -->
+					</div>
+				<div class="panel panel-default">
+				<div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-toggle="collapse" class="pull-right"  href="#accordion2-2">
+						  <span class="fa fa-chevron-down"></span>
+						</a>
+						 <a data-toggle="collapse" href="#accordion2-2">
+							Comments and Feedbacks
+						  </a>
+						</h4>
+					</div>
+					<div id="accordion2-2" class="panel-collapse collapse in">
+					<div class="panel-body" style="max-height:300px;overflow-y:scroll">
+						<div class="fb-comments" data-href="http://typographymaker.com" data-width="220" data-numposts="5" data-colorscheme="light"></div>
+					</div>
+					</div>
+				</div><!-- // -->
+
+			</div>
+		</div>
+	</div>
+<div class="modal fade" id="modal-help">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Help</h4>
+      </div>
+      <div class="modal-body">
+      		<h5>Keyboard Shorcut</h5>
+			<div class="easytablejs">
+				Key:Action
+				<kbd>Del</kbd>:Delete selected object
+				<kbd>Up arrow</kbd>:Move object up
+				<kbd>Right arrow</kbd>:Move object to the right
+				<kbd>Down arrow</kbd>:Move object down
+				<kbd>Left arrow</kbd>:Move object to the left
+				<kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> <kbd>4</kbd> <kbd>5</kbd> <kbd>6</kbd> <kbd>7</kbd> <kbd>8</kbd> <kbd>9</kbd> <kbd>0</kbd>:Set object opacity
+				<kbd>PageUp</kbd>:Bring forward
+				<kbd>PageDown</kbd>:Send backwards
+				<kbd>Shift+PageUp</kbd>:Bring to front
+				<kbd>Shift+PageDown</kbd>:Send to back
+				<kbd>Shift+D</kbd>:Duplicate
+			</div>
+			<h5>General</h5>
+				<ul>
+					<li>To change canvas background color, click on the color fill when none object is selected.</li>
+				</ul>
+		</div>
+	</div>
+	</div>
+</div>
+<div class="modal fade" id="modal-about">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">About </h4>
+      </div>
+      <div class="modal-body">
+		<h1 style="margin-top:0">Typography Maker</h1>
+			<p>Version: 0.1, Release: 06/2014<br>
+			Author: <a href="http://takien.com" target="_blank">takien</a><br>
+			</p>
+			<p>Credit:<br>
+			<a href="#">jQuery</a>, <a href="#">jQuery UI</a>
+			, <a href="#">FabricJS</a>
+			, <a href="#"><strike>YepnopeJS</strike></a>
+			, <a href="#"><strike>HeadJS</strike></a>
+			, <a href="#">FallbackJS</a>
+			, <a href="#">Twitter Bootstrap</a>
+			, <a href="#">FontAwesome</a>
+			</p>
+		</div>
+	</div>
+	</div>
+</div>
+<div class="modal fade" id="modal-publish">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Publish Typography </h4>
+      </div>
+      <div class="modal-body">
+			<form id="pubForm" class="form-horizontal" role="form" method="post" action="post.php">
+			  		<div class="form-group">
+						<label for="pubTitle" class="col-sm-2 control-label" required="required">Title</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" id="pubTitle" name="pubTitle" placeholder="Title" required="required">
+						</div>
+			  		</div>
+					<div class="form-group">
+						<label for="pubDesc" class="col-sm-2 control-label">Description</label>
+						<div class="col-sm-10">
+						  <textarea  class="form-control" rows="2" id="pubDesc" name="pubDesc" placeholder="Description"></textarea>
+						</div>
+			  		</div>
+			  		<div class="form-group">
+							<label for="pubTag" class="col-sm-2 control-label">Tags</label>
+							<div class="col-sm-10">
+							  <input type="text" class="form-control" name="pubTag" id="pubTag" placeholder="Tag1,tag2,tag3">
+							</div>
+			  		</div>
+					<div class="form-group">
+							<label for="pubPreview" class="col-sm-2 control-label">Preview</label>
+							<div class="col-sm-10">
+							  <input type="hidden" name="pubPreview" id="pubPreview" value="">
+<input type="hidden" name="pubJSON" id="pubJSON" value="">
+<input type="hidden" name="pubFonts" id="pubFonts" value="">
+							  <img id="pub_preview" style="max-width:200px;border:1px solid #ccc" src="" alt="">
+							</div>
+			  		</div>
+			  		
+			  		<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+							  <div class="checkbox">
+								<label>
+ <input type='hidden' value='0' name='pubTemplate'>
+								  <input id="pubTemplate" name="pubTemplate" type="checkbox" value="1"> Allow others to use this as a template?
+								</label>
+							  </div>
+							</div>
+					</div>
+					<div class="form-group">
+					<ul class="quick-links" style="text-align:left;padding-left:120px">
+					
+					 <li class="fb-login-btn"><div class="fb-login-button"  data-scope='email' data-max-rows="1" data-size="small" data-show-faces="false" data-auto-logout-link="false"></div></li>
+					 <li class="fb-loggedin-btn"><p>Logged in as:</p> <div class="fb-avatar"></div><div class="fb-name"></div></li>
+					 </ul>
+					</div>
+			  	
+			  <div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+				  <button id="pub_submit" type="submit" class="btn btn-primary">Publish</button>
+				</div>
+			  </div>
+			</form>
+
+		</div>
+	</div>
+	</div>
+</div>
+
+
+</main>
+<footer id="footer"></footer>
+<div id="fb-root"></div>
+<div id="loading" style="position:fixed;top:0;left:0;width:100%;min-height:600px;z-index:100;background:#fff;text-align:center;font-family:sans-serif">
+    <div style="display:table;width:100%;height:100%;height:600px;">
+        <div id="loading-inner" style="display:table-cell;vertical-align:middle;height:600px;"><p style="width:300px;text-align:center;margin:0 auto"><span>Initializing...</span><br>please wait...</p>
+		<div id="log"></div>
+		</div>
+    </div>
+</div>
+<script>
+document.getElementById('loading').style.height = window.innerHeight+'px';
+document.getElementById('loading-inner').style.height = window.innerHeight+'px';
+document.getElementById('body').style.overflow = 'hidden';
+</script>
+<!--<script src="js/fb.js"></script>-->
+<script src="js/whatever.js"></script>
+</body>
+</html>
