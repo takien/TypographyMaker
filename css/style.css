@@ -73,6 +73,9 @@ input[type="number"]{
 #main {
 	width: calc(100% - 250px);
 }
+.navbar-brand span {
+display:none;
+}
 }
 
 .container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
